@@ -31,14 +31,48 @@ exports.getAllDebts = async (req, res) => {
     }
 };
 
-exports.getDebt = (req, res) => {
-    res.status(200).send('Get Debt');
+exports.getDebt = async (req, res) => {
+    try {
+        const debtId = req.params.id;
+        const debt = await debtServices.getDebt(debtId);
+        res.status(200).json(debt);
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json({message: error.message});
+        } else {
+            console.log(error.message);
+            res.status(500).json({message: 'Internal Error'});
+        }
+    }
 };
 
-exports.updateDebt = (req, res) => {
-    res.status(200).send('Update Debt');
+exports.updateDebt = async (req, res) => {
+    try {
+        const debtId = req.params.id;
+        const data = {...req.body};
+        await debtServices.updateDebt(debtId, data);
+        res.status(200).json({message: 'The debt was successfully updated.'});
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json({message: error.message});
+        } else {
+            console.log(error.message);
+            res.status(500).json({message: 'Internal Error'});
+        }
+    }
 };
 
-exports.deleteDebt = (req, res) => {
-    res.status(200).send('Delete Debt');
+exports.deleteDebt = async (req, res) => {
+    try {
+        const debtId = req.params.id;
+        await debtServices.deleteDebt(debtId);
+        res.status(200).json({message: 'The debt was successfully deleted.'});
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json({message: error.message});
+        } else {
+            console.log(error.message);
+            res.status(500).json({message: 'Internal Error'});
+        }
+    }
 };
