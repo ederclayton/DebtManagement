@@ -2,8 +2,15 @@ const debtServices = require('../services/debtService');
 
 exports.createDebt = async (req, res) => {
     try {
-        let newDebt = { ...req.body };
-        newDebt.clientId = req.params.client;
+        const { value, date, reason } = req.body;
+
+        const newDebt = {
+            clientId: req.params.client,
+            value,
+            date,
+            reason
+        };
+
         await debtServices.saveDebt(newDebt);
         res.status(200).json({message: 'The debt was successfully saved'});
     } catch (error) {
@@ -49,8 +56,13 @@ exports.getDebt = async (req, res) => {
 exports.updateDebt = async (req, res) => {
     try {
         const debtId = req.params.id;
-        const data = {...req.body};
-        await debtServices.updateDebt(debtId, data);
+        const { clientId, value, date, reason } = req.body;
+
+        const debt = {
+            clientId, value, date, reason
+        };
+        
+        await debtServices.updateDebt(debtId, debt);
         res.status(200).json({message: 'The debt was successfully updated.'});
     } catch (error) {
         if (error.status) {

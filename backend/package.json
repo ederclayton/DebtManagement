@@ -5,13 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/unit.test.js --exit"
   },
   "author": "Eder Clayton <eder.comp.uece@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
@@ -19,6 +20,11 @@
     "mongoose": "^5.9.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "chai": "^4.2.0",
+    "mocha": "^7.1.0",
+    "nodemon": "^2.0.2",
+    "sinon": "^9.0.0",
+    "sinon-chai": "^3.5.0",
+    "sinon-express-mock": "^2.2.1"
   }
 }

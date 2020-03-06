@@ -28,7 +28,8 @@ const getAllDebts = async (clientId) => {
 
 const getDebt = async (debtId) => {
     try {
-        const res = await DebtModel.findById(debtId, {'__v': 0});
+        let res = await DebtModel.findById(debtId, {'__v': 0});
+        
         return res;
     } catch (error) {
         if (error instanceof Mongoose.CastError) {
@@ -41,9 +42,6 @@ const getDebt = async (debtId) => {
 
 const updateDebt = async (debtId, data) => {
     try {
-        if (data._id) {
-            delete data._id;
-        }
 
         if (_.isEmpty(data)) {
             throw new AppError('No data was found to be updated.', 404);
