@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'RobotoMono';
+  src: url('./fonts/NanumGothic-Regular.ttf');
+}
+
+* {
+  font-family: 'RobotoMono';
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
